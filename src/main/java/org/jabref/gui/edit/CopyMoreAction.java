@@ -72,6 +72,8 @@ public class CopyMoreAction extends SimpleCommand {
                     copyKeyAndLink();
             case COPY_DOI, COPY_DOI_URL ->
                     copyDoi();
+            case COPY_REPLACE_CONSTANTS ->
+                    copyReplaceConstants();
             default ->
                     LOGGER.info("Unknown copy command.");
         }
@@ -263,5 +265,9 @@ public class CopyMoreAction extends SimpleCommand {
             dialogService.notify(Localization.lang("Warning: %0 out of %1 entries have undefined citation key.",
                     Long.toString(entries.size() - entriesWithKey.size()), Integer.toString(entries.size())));
         }
+    }
+
+    private void copyReplaceConstants() {
+        // todo: When copying a BibEntry in the clipboard, also referenced @string constants should be put into the clipboard.
     }
 }

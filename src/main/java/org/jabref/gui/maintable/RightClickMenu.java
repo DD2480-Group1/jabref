@@ -103,6 +103,7 @@ public class RightClickMenu {
                 factory.createMenuItem(StandardActions.COPY_CITE_KEY, new CopyMoreAction(StandardActions.COPY_CITE_KEY, dialogService, stateManager, clipBoardManager, preferencesService, abbreviationRepository)),
                 factory.createMenuItem(StandardActions.COPY_KEY_AND_TITLE, new CopyMoreAction(StandardActions.COPY_KEY_AND_TITLE, dialogService, stateManager, clipBoardManager, preferencesService, abbreviationRepository)),
                 factory.createMenuItem(StandardActions.COPY_KEY_AND_LINK, new CopyMoreAction(StandardActions.COPY_KEY_AND_LINK, dialogService, stateManager, clipBoardManager, preferencesService, abbreviationRepository)),
+                factory.createMenuItem(StandardActions.COPY_REPLACE_CONSTANTS, new CopyMoreAction(StandardActions.COPY_REPLACE_CONSTANTS, dialogService, stateManager, clipBoardManager, preferencesService, abbreviationRepository)),
                 factory.createMenuItem(StandardActions.COPY_DOI, new CopyMoreAction(StandardActions.COPY_DOI, dialogService, stateManager, clipBoardManager, preferencesService, abbreviationRepository)),
                 factory.createMenuItem(StandardActions.COPY_DOI_URL, new CopyMoreAction(StandardActions.COPY_DOI_URL, dialogService, stateManager, clipBoardManager, preferencesService, abbreviationRepository)),
                 new SeparatorMenuItem()
