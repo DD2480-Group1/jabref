@@ -258,8 +258,7 @@ public class MainTable extends TableView<BibEntryTableViewModel> {
         List<BibEntry> selectedEntries = getSelectedEntries();
 
         if (!selectedEntries.isEmpty()) {
-            List<BibtexString> stringConstants = getStringValues();
-
+            List<BibtexString> stringConstants = database.getDatabase().getUsedStrings(selectedEntries).stream().toList();
             try {
                 if (!stringConstants.isEmpty()) {
                     clipBoardManager.setContent(selectedEntries, entryTypesManager, stringConstants);

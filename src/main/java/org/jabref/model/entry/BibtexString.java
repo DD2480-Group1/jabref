@@ -158,7 +158,9 @@ public class BibtexString implements Cloneable {
     public Object clone() {
         BibtexString clone = new BibtexString(name, content);
         clone.setId(id);
-        clone.setParsedSerialization(parsedSerialization);
+        if (parsedSerialization != null) {
+            clone.setParsedSerialization(parsedSerialization);
+        }
 
         return clone;
     }
