@@ -171,7 +171,7 @@ public class ClipBoardManager {
         final ClipboardContent content = new ClipboardContent();
         BibEntryWriter writer = new BibEntryWriter(new FieldWriter(preferencesService.getFieldPreferences()), entryTypesManager);
         StringBuilder builder = new StringBuilder();
-        stringConstants.forEach(strConst -> builder.append(strConst.getParsedSerialization()));
+        stringConstants.forEach(strConst -> builder.append(strConst.getParsedSerialization() == null ? "" : strConst.getParsedSerialization()));
         String serializedEntries = writer.serializeAll(entries, BibDatabaseMode.BIBTEX);
         builder.append(serializedEntries);
         // BibEntry is not Java serializable. Thus, we need to do the serialization manually
