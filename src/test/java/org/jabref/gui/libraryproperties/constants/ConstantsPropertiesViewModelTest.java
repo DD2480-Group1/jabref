@@ -140,38 +140,6 @@ class ConstantsPropertiesViewModelTest {
        assertEquals(actual, expected);
    }
 
-   /*
-   @Test
-   void storeSettingStringNull() {
-       // Setup
-       BibDatabase db = new BibDatabase();
-       BibDatabaseContext context = new BibDatabaseContext(db);
-       List<String> expected = List.of("KTH", "Royal Institute of Technology");
-
-       ConstantsPropertiesViewModel model = new ConstantsPropertiesViewModel(context, service, filePreferences);
-
-       ClipboardContent content = new ClipboardContent();
-       content.putString("@article{claudepierre:20a,\n    author = {Claudepierre, S. G.},\n    journal = grl\n}");
-       Clipboard clipboard = mock(Clipboard.class);
-       clipboard.setContent(content);
-
-       java.awt.datatransfer.Clipboard test = mock(java.awt.datatransfer.Clipboard.class);
-
-       ClipBoardManager clipBoardManager = new ClipBoardManager(clipboard, test, preferencesService);
-
-       //var stringsList = model.stringsListProperty();
-       //stringsList.add(new ConstantsItemModel(null, "Royal Institute of Technology"));
-
-       // Act
-       //model.storeSettings();
-
-       System.out.println(clipBoardManager.getContents());
-
-       assertEquals(clipBoardManager.getContents(), "test");
-       assertNotNull(clipBoardManager.getContents());
-   }
-   */
-
    @Test
    void testCopyStringBibEntry() {
        // Arrange
