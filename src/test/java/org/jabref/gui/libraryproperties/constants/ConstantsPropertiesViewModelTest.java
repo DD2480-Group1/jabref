@@ -11,6 +11,7 @@ import org.jabref.model.database.BibDatabaseContext;
 import org.jabref.model.entry.BibtexString;
 import org.jabref.preferences.FilePreferences;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -100,6 +101,32 @@ class ConstantsPropertiesViewModelTest {
 
        List<String> actual = Stream.concat(names.stream(), content.stream()).toList();
 
-       assertEquals(actual, expected);
+       assertEquals(expected, actual);
    }
+
+    @Test
+    @DisplayName("Check that the storeSettings method can identify string constants")
+    void storeSettingsWithStringConstantTest() {
+        // Setup
+        // create a bibdatabse
+        BibDatabase db = new BibDatabase();
+        BibDatabaseContext context = new BibDatabaseContext(db);
+        List<String> expected = List.of("@String{KTH = Royal Institute of Technology}");
+        // initialize a constantsPropertiesViewModel
+        ConstantsPropertiesViewModel model = new ConstantsPropertiesViewModel(context, service, filePreferences);
+
+        // construct value to store in model
+        var stringsList = model.stringsListProperty();
+        stringsList.add(new ConstantsItemModel("KTH", "Royal Institute of Technology"));
+
+        // Act
+        model.storeSettings();
+
+        // Assert
+        // get string the constants through parsedSerialization() method
+        List<String> actual = context.getDatabase().getStringValues().stream()
+                                     .map(BibtexString::getParsedSerialization).toList();
+
+        assertEquals(StringUtils.normalizeSpace(expected.getFirst()), StringUtils.normalizeSpace(actual.getFirst()));
+    }
 }
