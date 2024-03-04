@@ -21,13 +21,11 @@ import org.jabref.model.entry.field.StandardField;
 import org.jabref.model.entry.types.StandardEntryType;
 import org.jabref.preferences.PreferencesService;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -88,8 +86,11 @@ public class ClipBoardManagerTest {
 
         // Assert
         String actual = ClipBoardManager.getContentsPrimary();
-        assertNotEquals("test", StringUtils.normalizeSpace(actual));
-        assertEquals(StringUtils.normalizeSpace(expected), StringUtils.normalizeSpace(actual));
+        // clean strings
+        actual = actual.replaceAll("\\s+", " ").trim();
+        expected = expected.replaceAll("\\s+", " ").trim();
+
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -128,7 +129,10 @@ public class ClipBoardManagerTest {
 
         // Assert
         String actual = ClipBoardManager.getContentsPrimary();
-        assertNotEquals("test", StringUtils.normalizeSpace(actual));
-        assertEquals(StringUtils.normalizeSpace(expected), StringUtils.normalizeSpace(actual));
+        // clean strings
+        actual = actual.replaceAll("\\s+", " ").trim();
+        expected = expected.replaceAll("\\s+", " ").trim();
+
+        assertEquals(expected, actual);
     }
 }

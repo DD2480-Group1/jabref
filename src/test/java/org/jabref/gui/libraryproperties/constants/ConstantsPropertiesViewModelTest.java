@@ -11,7 +11,6 @@ import org.jabref.model.database.BibDatabaseContext;
 import org.jabref.model.entry.BibtexString;
 import org.jabref.preferences.FilePreferences;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -127,6 +126,10 @@ class ConstantsPropertiesViewModelTest {
         List<String> actual = context.getDatabase().getStringValues().stream()
                                      .map(BibtexString::getParsedSerialization).toList();
 
-        assertEquals(StringUtils.normalizeSpace(expected.getFirst()), StringUtils.normalizeSpace(actual.getFirst()));
+        // get the first value and clean strings
+        String actual_value = actual.getFirst().replaceAll("\\s+", " ").trim();
+        String expected_value = expected.getFirst().replaceAll("\\s+", " ").trim();
+
+        assertEquals(expected_value, actual_value);
     }
 }
