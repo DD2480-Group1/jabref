@@ -2,6 +2,7 @@ package org.jabref.gui;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.input.Clipboard;
 
+import org.jabref.architecture.AllowedToUseAwt;
 import org.jabref.logic.bibtex.FieldPreferences;
 import org.jabref.model.entry.BibEntry;
 import org.jabref.model.entry.BibEntryType;
@@ -30,6 +32,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@AllowedToUseAwt("Requires AWT for clipboard access")
 public class ClipBoardManagerTest {
 
     private BibEntryTypesManager entryTypesManager;
@@ -63,7 +66,7 @@ public class ClipBoardManagerTest {
 
     @DisplayName("Check that the ClipBoardManager can set a bibentry as its content from the clipboard")
     @Test
-    void testCopyStringBibEntry() {
+    void testCopyStringBibEntry() throws IOException {
         // Arrange
         String expected = "@Article{,\n author = {Claudepierre, S. G.},\n journal = {IEEE},\n}";
 
@@ -78,11 +81,7 @@ public class ClipBoardManagerTest {
         bibEntries.add(bibEntry);
 
         // Act
-        try {
-            clipBoardManager.setContent(bibEntries, entryTypesManager);
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
+        clipBoardManager.setContent(bibEntries, entryTypesManager);
 
         // Assert
         String actual = ClipBoardManager.getContentsPrimary();
@@ -95,7 +94,7 @@ public class ClipBoardManagerTest {
 
     @Test
     @DisplayName("Check that the ClipBoardManager can handle a bibentry with string constants correctly from the clipboard")
-    void testCopyStringBibEntryWithStringConstants() {
+    void testCopyStringBibEntryWithStringConstants() throws  {
         // Arrange
         String expected = "@String{grl = \"Geophys. Res. Lett.\"}@Article{,\n" + " author = {Claudepierre, S. G.},\n" +
                 " journal = {grl},\n" + "}";
@@ -121,11 +120,7 @@ public class ClipBoardManagerTest {
         constants.add(bibtexString);
 
         // Act
-        try {
-            clipBoardManager.setContent(bibEntries, entryTypesManager, constants);
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
+        clipBoardManager.setContent(bibEntries, entryTypesManager, constants);
 
         // Assert
         String actual = ClipBoardManager.getContentsPrimary();
