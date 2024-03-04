@@ -258,7 +258,7 @@ public class MainTable extends TableView<BibEntryTableViewModel> {
         List<BibEntry> selectedEntries = getSelectedEntries();
 
         if (!selectedEntries.isEmpty()) {
-            List<BibtexString> stringConstants = database.getDatabase().getUsedStrings(selectedEntries).stream().toList();
+            List<BibtexString> stringConstants = getUsedStringValues(selectedEntries);
             try {
                 if (!stringConstants.isEmpty()) {
                     clipBoardManager.setContent(selectedEntries, entryTypesManager, stringConstants);
@@ -496,10 +496,7 @@ public class MainTable extends TableView<BibEntryTableViewModel> {
                     .findFirst();
     }
 
-    private List<BibtexString> getStringValues() {
-        return database.getDatabase()
-                       .getStringValues()
-                       .stream()
-                       .toList();
+    private List<BibtexString> getUsedStringValues(List<BibEntry> entries) {
+        return database.getDatabase().getUsedStrings(entries).stream().toList();
     }
 }
