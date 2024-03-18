@@ -52,7 +52,7 @@ public class ClipBoardManagerTest {
         java.awt.datatransfer.Clipboard clipboardPrimary = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboardPrimary.setContents(selection, selection);
 
-        // create mock entry manager and set up behaviour for mock
+        // create an entry manager
         entryTypesManager = new BibEntryTypesManager();
 
         // initialize a clipBoardManager
